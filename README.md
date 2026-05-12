@@ -115,10 +115,6 @@ curl "https://xxx.workers.dev/restart?pwd=你的密码&account=user@gmail.com"
 
 ## 🧭 保姆级部署教程（Cloudflare Workers 网页版）
 
-> 目标：把这个项目重新部署到另一个 Cloudflare 账号上，得到一个新的 `xxx.workers.dev`，让它自己定时续期和重启。
->
-> 这个仓库只用来保存 Worker 代码和教程，**不需要配置 GitHub Actions**。
-
 ### 1️⃣ 创建 Worker
 
 1. 登录 Cloudflare Dashboard
@@ -227,20 +223,6 @@ curl "https://keeppellaalive.xxx.workers.dev/restart?pwd=你的PASSWORD&account=
 ```
 
 如果配置了 Telegram，执行后应该会收到续期 / 重启结果通知。
-
-### 7️⃣ 迁移旧 Worker 时的顺序
-
-如果你是从旧 Cloudflare 账号迁移过来，建议按这个顺序：
-
-1. 先在新账号部署 Worker
-2. 配好 `PASSWORD` / `ACCOUNT` / Telegram 变量
-3. 手动测试续期接口
-4. 手动测试重启接口
-5. 确认 Telegram 有结果通知
-6. 再添加两条 Cron
-7. 观察一次自动执行正常后，再去旧 Worker 删除 Cron Trigger
-
-不要一上来就关旧的；先让新的跑通，避免中间断档。
 
 ---
 ## 📸 效果展示
