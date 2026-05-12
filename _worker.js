@@ -36,7 +36,10 @@ export default {
   },
 
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(safeRun(() => main(env, 'renew')));
+    // Cron `0 8,20 * * *` triggers restarts twice daily at Beijing 16:00 and 04:00.
+    // Other Cron triggers, such as `0 */4 * * *`, run renewal.
+    const mode = event?.cron === '0 8,20 * * *' ? 'restart' : 'renew';
+    ctx.waitUntil(safeRun(() => main(env, mode)));
   }
 };
 
